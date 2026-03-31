@@ -1,0 +1,21 @@
+name: RDP Free
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Enable RDP
+      run: |
+        net user runneradmin Password123!
+        net localgroup administrators runneradmin /add
+
+    - name: Download Ngrok
+      run: |
+        choco install ngrok -y
+
+    - name: Start Tunnel
+      run: |
+        ngrok tcp 3389
