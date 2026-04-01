@@ -8,14 +8,13 @@ jobs:
 
     steps:
     - name: Enable RDP
-      run: |
-        net user runneradmin Password123!
-        net localgroup administrators runneradmin /add
+      run: net user runneradmin Password123!
 
     - name: Download Ngrok
-      run: |
-        choco install ngrok -y
+      run: choco install ngrok -y
+
+    - name: Set Ngrok Auth
+      run: ngrok config add-authtoken $env:NGROK_AUTH_TOKEN
 
     - name: Start Tunnel
-      run: |
-        ngrok tcp 3389
+      run: ngrok tcp 3389
