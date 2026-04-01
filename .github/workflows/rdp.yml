@@ -7,9 +7,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Enable RDP
-      run: net user runneradmin Password123!
-
     - name: Download Ngrok
       run: choco install ngrok -y
 
@@ -17,4 +14,6 @@ jobs:
       run: ngrok config add-authtoken $env:NGROK_AUTH_TOKEN
 
     - name: Start Tunnel
-      run: ngrok tcp 3389
+      run: |
+        start ngrok tcp 3389
+        timeout /t 3600
